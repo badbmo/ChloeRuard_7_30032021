@@ -9,7 +9,7 @@ import recipes from "./recipes.js";
 class Index {
 	constructor() {
 		this.recipes = recipes;
-		this.query="";
+		this.query = "";
 		this.displayHeader();
 		this.displaySearch();
 		this.displayRecipeCard(this.recipes);
@@ -97,21 +97,42 @@ class Index {
 		});
 	}
 
-	sortRecipes(){
-		this.filteredRecipes=this.recipes;
+	sortRecipes() {
+		// // -- Sort with SearchBar V1 --
+		// this.filteredRecipes = this.recipes;
+		// console.log(this.query);
+		// //search in name, description or ingredient if recipe contains searchstring from workingSearchBar
+		// this.filteredRecipes = this.filteredRecipes.filter((recipe) => {
+		// 	if (recipe.name.toLowerCase().includes(this.query)) {
+		// 		return recipe;
+		// 	}
+		// 	if (recipe.description.toLowerCase().includes(this.query)) {
+		// 		return recipe;
+		// 	}
+		// 	if (recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))) {
+		// 		return recipe;
+		// 	}
+		// });
+
+		// -- Sort with SearchBar V2 --
+		this.filteredRecipes = [];
 		console.log(this.query);
 		//search in name, description or ingredient if recipe contains searchstring from workingSearchBar
-		this.filteredRecipes = this.filteredRecipes.filter((recipe) => {
-			if (recipe.name.toLowerCase().includes(this.query)) {
-				return recipe;
+		for (let i = 0; i < this.recipes.length; i++) {
+			if (this.recipes[i].name.toLowerCase().includes(this.query)) {
+				this.filteredRecipes.push(this.recipes[i]);
 			}
-			if (recipe.description.toLowerCase().includes(this.query)) {
-				return recipe;
+			if (this.recipes[i].description.toLowerCase().includes(this.query)) {
+				this.filteredRecipes.push(this.recipes[i]);
 			}
-			if (recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))) {
-				return recipe;
+			if (this.recipes[i].ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))) {
+				this.filteredRecipes.push(this.recipes[i]);
 			}
-		});
+		}
+		this.filteredRecipes = [...new Set(this.filteredRecipes)];
+		console.log(this.filteredRecipes);
+
+		// -- Sort with Tags --
 		const tags = document.querySelectorAll(".tag");
 		tags.forEach((tag) => {
 			const contentTag = tag.dataset.id;
@@ -171,11 +192,11 @@ class Index {
 		searchInput.addEventListener("keyup", (e) => {
 			this.searchString = e.target.value.toLowerCase().trim();
 			if (this.searchString.length > 2) {
-				this.query=this.searchString;
+				this.query = this.searchString;
 				this.sortRecipes();
 			}
 			if (this.searchString.length <= 2) {
-				this.query="";
+				this.query = "";
 				this.sortRecipes();
 			}
 		});
