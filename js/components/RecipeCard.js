@@ -38,7 +38,6 @@ export default class RecipeCard {
 		return `
 		<article class="recipe__card" data-id="${this.id}">
       <div class="recipe__picture">
-        <img src="" alt="">
       </div>
 			<div class="recipe__info">
 				<div class="recipe__header">

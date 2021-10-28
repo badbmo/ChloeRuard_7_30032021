@@ -27,11 +27,11 @@ export default class SearchButton {
 			}
 		});
 
-		this.searchFunction();
+		this.searchResults();
 	}
 
 	//display the right results according to what is searched with input
-	searchFunction() {
+	searchResults() {
 		const buttonInput = document.querySelectorAll(".searchButton__input");
 		buttonInput.forEach((input) => {
 			input.addEventListener("keyup", (e) => {

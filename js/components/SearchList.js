@@ -20,7 +20,7 @@ export default class SearchList {
 		const arrayAppliances = this.data.map((recipe) => {
 			return recipe.appliance.toLowerCase();
 		});
-		this.setAppliances = [...new Set(arrayAppliances)];
+		return (this.setAppliances = [...new Set(arrayAppliances)]);
 	}
 
 	uniqueArrayIngredient() {

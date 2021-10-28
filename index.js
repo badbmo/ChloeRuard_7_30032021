@@ -99,38 +99,30 @@ class Index {
 
 	sortRecipes() {
 		// // -- Sort with SearchBar V1 --
-		// this.filteredRecipes = this.recipes;
-		// console.log(this.query);
 		// //search in name, description or ingredient if recipe contains searchstring from workingSearchBar
-		// this.filteredRecipes = this.filteredRecipes.filter((recipe) => {
-		// 	if (recipe.name.toLowerCase().includes(this.query)) {
-		// 		return recipe;
-		// 	}
-		// 	if (recipe.description.toLowerCase().includes(this.query)) {
-		// 		return recipe;
-		// 	}
-		// 	if (recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))) {
-		// 		return recipe;
+		// this.filteredRecipes = this.recipes.filter((recipe) => {
+		// 	if (
+		// 		recipe.name.toLowerCase().includes(this.query) ||
+		// 		recipe.description.toLowerCase().includes(this.query) ||
+		// 		recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))
+		// 	) {
+		// 		return true;
 		// 	}
 		// });
 
 		// -- Sort with SearchBar V2 --
 		this.filteredRecipes = [];
-		console.log(this.query);
 		//search in name, description or ingredient if recipe contains searchstring from workingSearchBar
 		for (let i = 0; i < this.recipes.length; i++) {
-			if (this.recipes[i].name.toLowerCase().includes(this.query)) {
-				this.filteredRecipes.push(this.recipes[i]);
-			}
-			if (this.recipes[i].description.toLowerCase().includes(this.query)) {
-				this.filteredRecipes.push(this.recipes[i]);
-			}
-			if (this.recipes[i].ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))) {
+			if (
+				this.recipes[i].name.toLowerCase().includes(this.query) ||
+				this.recipes[i].description.toLowerCase().includes(this.query) ||
+				this.recipes[i].ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))
+			) {
 				this.filteredRecipes.push(this.recipes[i]);
 			}
 		}
 		this.filteredRecipes = [...new Set(this.filteredRecipes)];
-		console.log(this.filteredRecipes);
 
 		// -- Sort with Tags --
 		const tags = document.querySelectorAll(".tag");
@@ -162,6 +154,7 @@ class Index {
 	}
 
 	//if <li> clicked and transformed to tag, remove the <li> selected from the list of results (= a tag is unique)
+	//adding a class instead of display: none to avoid conflict with searchResults() in SearchButton.js
 	checkIfResultInTag() {
 		const tags = [...document.querySelectorAll(".tag")];
 		const tagsArray = tags.map((tag) => {
@@ -187,6 +180,7 @@ class Index {
 		}
 	}
 
+	//search with searchbar with at least 3 letters. Define this query for this.sortRecipes
 	sortWithSearchBar() {
 		const searchInput = document.querySelector(".search__input");
 		searchInput.addEventListener("keyup", (e) => {
