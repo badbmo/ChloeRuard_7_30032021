@@ -98,19 +98,17 @@ class Index {
 	}
 
 	sortRecipes() {
-		// -- Sort with SearchBar V1 --
-		this.filteredRecipes = [];
+		// -- Sort with SearchBar V2 --
 		//search in name, description or ingredient if recipe contains searchstring from workingSearchBar
-		for (let i = 0; i < this.recipes.length; i++) {
+		this.filteredRecipes = this.recipes.filter((recipe) => {
 			if (
-				this.recipes[i].name.toLowerCase().includes(this.query) ||
-				this.recipes[i].description.toLowerCase().includes(this.query) ||
-				this.recipes[i].ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))
+				recipe.name.toLowerCase().includes(this.query) ||
+				recipe.description.toLowerCase().includes(this.query) ||
+				recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))
 			) {
-				this.filteredRecipes.push(this.recipes[i]);
+				return true;
 			}
-		}
-		this.filteredRecipes = [...new Set(this.filteredRecipes)];
+		});
 
 		// -- Sort with Tags --
 		const tags = document.querySelectorAll(".tag");
