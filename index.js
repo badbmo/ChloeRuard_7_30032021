@@ -98,19 +98,7 @@ class Index {
 	}
 
 	sortRecipes() {
-		// // -- Sort with SearchBar V1 --
-		// //search in name, description or ingredient if recipe contains searchstring from workingSearchBar
-		// this.filteredRecipes = this.recipes.filter((recipe) => {
-		// 	if (
-		// 		recipe.name.toLowerCase().includes(this.query) ||
-		// 		recipe.description.toLowerCase().includes(this.query) ||
-		// 		recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(this.query))
-		// 	) {
-		// 		return true;
-		// 	}
-		// });
-
-		// -- Sort with SearchBar V2 --
+		// -- Sort with SearchBar V1 --
 		this.filteredRecipes = [];
 		//search in name, description or ingredient if recipe contains searchstring from workingSearchBar
 		for (let i = 0; i < this.recipes.length; i++) {
