@@ -13,9 +13,17 @@
 	align-items: center;
 }
 
-.link__title{
+.link{
+&__title{
 	color: #D04F4F;
 	font-weight: 700;
-	font-size: 36px;
-	height: 50%;
+	font-size: 28px;
+	line-height:45px;
+	@include responsive(miniPhone){
+		font-size: 36px;
+	}
+}
+&__logo{
+		height: 50px;
+	}
 }
